@@ -4,6 +4,7 @@ const bodyParser = require('body-parser');
 
 const BuildUserModule = require("./http/users/registry.js");
 const RegisterServices = require('./core/registry.js');
+const StartDbConnection = require('./core/db.js');
 
 class App {
     app = {};
@@ -13,6 +14,8 @@ class App {
         this.port = port;
         this.app.Router = express()
         this.app.Router.use(bodyParser.json())
+
+        this.app.database = StartDbConnection();
 
         this.buildServices()
         this.buildModules()

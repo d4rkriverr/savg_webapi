@@ -4,7 +4,7 @@ const UserRepository = require("./repositories/user_repo");
 
 const RegisterServices = (app) => {
     const repos = {
-        user: new UserRepository()
+        user: new UserRepository(app)
     }
     app.Services = {
         UserService: new UserService(repos),
