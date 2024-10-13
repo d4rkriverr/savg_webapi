@@ -37,11 +37,14 @@ class UserController {
 
     UserInfo = (req, res) => {
         return res.status(200).json({
-            id: req.user?.id,
-            username: req.user?.username,
-            role: req.user?.role,
-            status: req.user?.status == 1,
-        })
+            success: true,
+            payload: {
+                id: req.user?.id,
+                username: req.user?.username,
+                role: req.user?.role,
+                status: req.user?.status == 1,
+            }
+        });
     }
 }
 
