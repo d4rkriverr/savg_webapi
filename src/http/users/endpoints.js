@@ -15,7 +15,7 @@ class UserController {
         }
         const r = await this.svc.UserService.Authenticate(username, password);
         if (r.success) {
-            return res.status(200).json(r)
+
         }
         res.status(401).json(r)
     }
@@ -28,13 +28,21 @@ class UserController {
         if (!password || password.length < 6) {
             return res.status(400).json({ message: 'Password must be at least 6 characters long' });
         }
-        const r = await this.svc.UserService.NewUser(username, password);
+        const r = await this.svc.UserService.NewUser(username, password, "USER");
         if (r.success) {
             return res.status(200).json(r)
         }
         res.status(400).json(r)
     }
-    UserInfo = (req, res) => { }
+
+    UserInfo = (req, res) => {
+        return res.status(200).json({
+            id: req.user?.id,
+            username: req.user?.username,
+            role: req.user?.role,
+            status: req.user?.status == 1,
+        })
+    }
 }
 
 
